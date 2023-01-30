@@ -50,12 +50,11 @@ public class WebCrawler {
                 e.printStackTrace();
             }
 
-            //String urlPattern = "(www|http:|https:)+[^\s]+[\\w]";
             String urlPattern = "[\\\"'](www|http:|https:)(.*?)[\\\"']";
             Pattern pattern = Pattern.compile(urlPattern);
             Matcher matcher = pattern.matcher(rawHTML);
 
-            breakpoint = getBreakpoint(breakpoint, matcher, rawHTML);
+            breakpoint = getBreakpoint(breakpoint, matcher);
 
             if (breakpoint == 0) {
                 break;
@@ -63,7 +62,7 @@ public class WebCrawler {
         }
     }
 
-    private int getBreakpoint(int breakpoint, Matcher matcher, String rawHTML) {
+    private int getBreakpoint(int breakpoint, Matcher matcher) {
         while (matcher.find()) {
             String actualURL = matcher.group();
 
